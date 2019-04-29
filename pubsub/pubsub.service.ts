@@ -3,12 +3,12 @@ import { GCLOUD_PROJECT } from '../consts/consts';
 const Pubsub = require('@google-cloud/pubsub');
 const pubsub = Pubsub({
   projectId: GCLOUD_PROJECT,
-  keyFilename: 'keyfile.json'
+  keyFilename: 'gcloud-service-key.json',
 });
 import { PubsubMessage } from './pubsub.types';
 
 class PubSubService {
-  constructor() { }
+  constructor() {}
 
   createOrGetTopic(topicName: string) {
     return new Promise((resolve, reject) => {
@@ -37,13 +37,14 @@ class PubSubService {
           console.error('Error occurred while queuing background task', err);
           reject(err);
         } else {
-          let resolveMessage = `${message.action} queued for background processing`;
+          let resolveMessage = `${
+            message.action
+          } queued for background processing`;
           resolve(resolveMessage);
         }
       });
     });
   }
-
 }
 
 export const pubSubService = new PubSubService();

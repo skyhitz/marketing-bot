@@ -1,6 +1,6 @@
-import pubsubPublisher from "../pubsub/pubsub-publisher";
-import { forEachLimit } from "async";
-import { tags } from "../consts/consts";
+import pubsubPublisher from '../pubsub/pubsub-publisher';
+import { forEachLimit } from 'async';
+import { tags } from '../consts/consts';
 
 /**
  * Command to trigger this function:
@@ -9,11 +9,11 @@ import { tags } from "../consts/consts";
 class Tags {
   public queue(event: { data: { data: string } }, callback: Function) {
     const pubsubMessage = JSON.parse(
-      Buffer.from(event.data.data, "base64").toString()
+      Buffer.from(event.data.data, 'base64').toString()
     );
     const { action } = pubsubMessage;
-    if (action !== "queueTags") {
-      console.warn("Unknown request");
+    if (action !== 'queueTags') {
+      console.warn('Unknown request');
       callback();
       return;
     }
