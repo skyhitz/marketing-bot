@@ -20,7 +20,7 @@ jobs:
       - run:
           name: Deploy queue tags function
           command: gcloud beta functions deploy queue-tags --source https://source.developers.google.com/projects/$PROJECT_ID/repos/$REPOSITORY_ID/moveable-aliases/$CIRCLE_BRANCH --trigger-topic queue-tags --entry-point queueTags --memory 2048MB --timeout=540
-  scrap-entries:
+  queue-tags:
     environment:
       - PROJECT_ID: skyhitz-161021
       - REPOSITORY_ID: functions
@@ -43,13 +43,21 @@ jobs:
 
 workflows:
   version: 2
-  deploy:
+  deploy-function:
     jobs:
       - build:
+          context: api
           filters:
             branches:
               only:
-                - staging
+                - master
+  queue-tags:
+    jobs:
+      - queue-tags:
+          context: api
+          filters:
+            branches:
+              only:
                 - master
   scheduled-workflow:
     triggers:
@@ -59,6 +67,5 @@ workflows:
             branches:
               only:
                 - master
-                - staging
     jobs:
-      - scrap-users
+      - queue-tags
