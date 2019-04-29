@@ -5,7 +5,7 @@ jobs:
       - PROJECT_ID: skyhitz-161021
       - REPOSITORY_ID: github_skyhitz_marketing-bot
     docker:
-      - image: google/cloud-sdk@sha256:38ca0e1c65676bcc5eb3c404891fd47548b29e33b5808cb223665b0914e7e4fb
+      - image: google/cloud-sdk:latest
     steps:
       - checkout
       - run:
