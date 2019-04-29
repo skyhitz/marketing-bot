@@ -46,7 +46,7 @@ workflows:
   deploy-function:
     jobs:
       - build:
-          context: api
+          context: social-bot
           filters:
             branches:
               only:
@@ -54,7 +54,7 @@ workflows:
   queue-tags:
     jobs:
       - queue-tags:
-          context: api
+          context: social-bot
           filters:
             branches:
               only:
