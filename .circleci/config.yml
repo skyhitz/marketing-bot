@@ -39,7 +39,7 @@ jobs:
           command: gcloud config set project $PROJECT_ID
       - run:
           name: Update topics
-          command: gcloud beta pubsub topics publish $CIRCLE_BRANCH-update-topics '{"action":"updateTopics"}'
+          command: gcloud beta pubsub topics publish queue-tags '{"action":"queueTags"}'
 
 workflows:
   version: 2
