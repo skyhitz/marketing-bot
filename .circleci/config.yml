@@ -1,0 +1,64 @@
+version: 2
+jobs:
+  build:
+    environment:
+      - PROJECT_ID: skyhitz-161021
+      - REPOSITORY_ID: functions
+    docker:
+      - image: google/cloud-sdk@sha256:38ca0e1c65676bcc5eb3c404891fd47548b29e33b5808cb223665b0914e7e4fb
+    steps:
+      - checkout
+      - run:
+          name: Export google service key
+          command: echo $GCLOUD_SERVICE_KEY | base64 --decode --ignore-garbage > ${HOME}/gcloud-service-key.json
+      - run:
+          name: Authenticate google cloud
+          command: gcloud auth activate-service-account --key-file ${HOME}/gcloud-service-key.json
+      - run:
+          name: Set google cloud project
+          command: gcloud config set project $PROJECT_ID
+      - run:
+          name: Deploy queue tags function
+          command: gcloud beta functions deploy queue-tags --source https://source.developers.google.com/projects/$PROJECT_ID/repos/$REPOSITORY_ID/moveable-aliases/$CIRCLE_BRANCH --trigger-topic queue-tags --entry-point queueTags --memory 2048MB --timeout=540
+  scrap-entries:
+    environment:
+      - PROJECT_ID: skyhitz-161021
+      - REPOSITORY_ID: functions
+    docker:
+      - image: google/cloud-sdk@sha256:38ca0e1c65676bcc5eb3c404891fd47548b29e33b5808cb223665b0914e7e4fb
+    steps:
+      - checkout
+      - run:
+          name: Export google service key
+          command: echo $GCLOUD_SERVICE_KEY | base64 --decode --ignore-garbage > ${HOME}/gcloud-service-key.json
+      - run:
+          name: Authenticate google cloud
+          command: gcloud auth activate-service-account --key-file ${HOME}/gcloud-service-key.json
+      - run:
+          name: Set google cloud project
+          command: gcloud config set project $PROJECT_ID
+      - run:
+          name: Update topics
+          command: gcloud beta pubsub topics publish $CIRCLE_BRANCH-update-topics '{"action":"updateTopics"}'
+
+workflows:
+  version: 2
+  deploy:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only:
+                - staging
+                - master
+  scheduled-workflow:
+    triggers:
+      - schedule:
+          cron: "0 0 * * 0"
+          filters:
+            branches:
+              only:
+                - master
+                - staging
+    jobs:
+      - scrap-users
