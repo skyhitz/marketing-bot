@@ -3,7 +3,10 @@ import { GCLOUD_PROJECT } from '../consts/consts';
 const Pubsub = require('@google-cloud/pubsub');
 const pubsub = Pubsub({
   projectId: GCLOUD_PROJECT,
-  keyFilename: 'gcloud-service-key.json',
+  credentials: {
+    private_key: process.env.PRIVATE_KEY,
+    client_email: process.env.CLIENT_EMAIL,
+  },
 });
 import { PubsubMessage } from './pubsub.types';
 
