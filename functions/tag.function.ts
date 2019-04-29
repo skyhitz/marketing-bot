@@ -1,4 +1,4 @@
-import { tagUrl } from 'consts/consts';
+import { tagUrl } from '../consts/consts';
 import fetch from 'node-fetch';
 
 /**
