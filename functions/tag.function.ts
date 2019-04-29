@@ -1,5 +1,5 @@
-import { tagUrl } from "consts/consts";
-import fetch from "node-fetch";
+import { tagUrl } from 'consts/consts';
+import fetch from 'node-fetch';
 
 /**
  * Tag function
@@ -9,12 +9,12 @@ class Tag {
 
   public async process(event: { data: { data: string } }, callback: Function) {
     const pubsubMessage = JSON.parse(
-      Buffer.from(event.data.data, "base64").toString()
+      Buffer.from(event.data.data, 'base64').toString()
     );
     const { action, tag } = pubsubMessage;
 
-    if (action !== "processTag") {
-      console.warn("Unknown request");
+    if (action !== 'processTag') {
+      console.warn('Unknown request');
       callback();
       return;
     }
