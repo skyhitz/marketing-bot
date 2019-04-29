@@ -19,7 +19,7 @@ jobs:
           command: gcloud config set project $PROJECT_ID
       - run:
           name: Deploy queue tags function
-          command: gcloud beta functions deploy queue-tags --source https://source.developers.google.com/projects/$PROJECT_ID/repos/$REPOSITORY_ID/moveable-aliases/$CIRCLE_BRANCH --trigger-topic queue-tags --entry-point queueTags --memory 2048MB --timeout=540 --set-env-vars GCLOUD_PRIVATE_KEY=$GCLOUD_PRIVATE_KEY,GCLOUD_CLIENT_EMAIL=$GCLOUD_CLIENT_EMAIL
+          command: gcloud beta functions deploy queue-tags --source https://source.developers.google.com/projects/$PROJECT_ID/repos/$REPOSITORY_ID/moveable-aliases/$CIRCLE_BRANCH --trigger-topic queue-tags --entry-point queueTags --memory 2048MB --timeout=540
   queue-tags:
     environment:
       - PROJECT_ID: skyhitz-161021
