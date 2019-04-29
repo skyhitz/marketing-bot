@@ -161,6 +161,6 @@
 
 2. Queue tag name
 3. Process data on function from https://www.instagram.com/explore/tags/{tagname}/?__a=1
-4. Extract description, labels
-5. Create comment according to description and labels
+4. Extract description, labels and data from post
+5. Use google vision and lanaguge processing models to generate a positive comment
 6. Post comment from account taking into account rate limits
