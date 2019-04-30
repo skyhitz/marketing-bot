@@ -22,7 +22,7 @@ jobs:
           command: gcloud beta functions deploy queue-tags --source https://source.developers.google.com/projects/$PROJECT_ID/repos/$REPOSITORY_ID/moveable-aliases/$CIRCLE_BRANCH --trigger-event providers/cloud.pubsub/eventTypes/topic.publish --trigger-resource queue-tags --entry-point queueTags --memory 2048MB --timeout=540
       - run:
           name: Deploy process tags function
-          command: gcloud beta functions deploy process-tags --source https://source.developers.google.com/projects/$PROJECT_ID/repos/$REPOSITORY_ID/moveable-aliases/$CIRCLE_BRANCH --trigger-event providers/cloud.pubsub/eventTypes/topic.publish --trigger-resource process-tags --entry-point processTags --memory 2048MB --timeout=540
+          command: gcloud beta functions deploy process-tags --source https://source.developers.google.com/projects/$PROJECT_ID/repos/$REPOSITORY_ID/moveable-aliases/$CIRCLE_BRANCH --trigger-event providers/cloud.pubsub/eventTypes/topic.publish --trigger-resource process-tag --entry-point processTag --memory 2048MB --timeout=540
   queue-tags:
     environment:
       - PROJECT_ID: skyhitz-161021
