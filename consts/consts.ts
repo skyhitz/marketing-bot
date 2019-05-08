@@ -12,7 +12,6 @@ export const tags: string[] = [
   'recordingstudio',
   'makingmusic',
   'musicismylife',
-  'music',
   'newmusic',
   'musicproduction',
   'newmusicalert',
