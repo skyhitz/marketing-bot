@@ -54,14 +54,14 @@ workflows:
             branches:
               only:
                 - master
-  queue-tags:
-    jobs:
-      - queue-tags:
-          context: social-bot
-          filters:
-            branches:
-              only:
-                - master
+  # queue-tags:
+  #   jobs:
+  #     - queue-tags:
+  #         context: social-bot
+  #         filters:
+  #           branches:
+  #             only:
+  #               - master
   # scheduled-workflow:
   #   triggers:
   #     - schedule:
