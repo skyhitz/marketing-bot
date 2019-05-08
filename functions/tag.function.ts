@@ -17,10 +17,15 @@ class Tag {
       console.warn('Unknown request');
       return;
     }
-
-    const res = await fetch(tagUrl(tag));
-    const data = res.json();
-    console.log(data);
+    let res;
+    try {
+      res = await fetch(tagUrl(tag));
+      console.log('response', res);
+      const data = res.json();
+      console.log('data', data);
+    } catch (e) {
+      console.log(e);
+    }
   }
 }
 
