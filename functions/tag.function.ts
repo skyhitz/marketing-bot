@@ -7,7 +7,7 @@ import fetch from 'node-fetch';
 class Tag {
   public maxPerPage = 5;
 
-  public async process(event: { data: string }, callback: Function) {
+  public async process(event: { data: string }) {
     const pubsubMessage = JSON.parse(
       Buffer.from(event.data, 'base64').toString()
     );
@@ -15,14 +15,12 @@ class Tag {
 
     if (action !== 'processTag') {
       console.warn('Unknown request');
-      callback();
       return;
     }
 
     const res = await fetch(tagUrl(tag));
     const data = res.json();
     console.log(data);
-    callback();
   }
 }
 
