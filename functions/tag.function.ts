@@ -21,7 +21,7 @@ class Tag {
     try {
       res = await fetch(tagUrl(tag));
       console.log('response', res);
-      const data = res.json();
+      const data = await res.json();
       console.log('data', data);
     } catch (e) {
       console.log(e);
