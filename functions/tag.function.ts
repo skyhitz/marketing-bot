@@ -21,8 +21,10 @@ class Tag {
     try {
       res = await fetch(tagUrl(tag));
       console.log('response', res);
-      const data = await res.json();
-      console.log('data', data);
+      const { graphql } = await res.json();
+      const { hashtag } = graphql;
+
+      console.log('data', hashtag);
     } catch (e) {
       console.log(e);
     }
