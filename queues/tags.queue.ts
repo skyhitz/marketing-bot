@@ -7,10 +7,10 @@ import { tags } from '../consts/consts';
  * gcloud beta pubsub topics publish queue-tags '{"action":"queueTags"}'
  */
 class Tags {
-  public queue(event: { data: { data: string } }, callback: Function) {
+  public queue(event: { data: string }, callback: Function) {
     console.log('event queue', event);
     const pubsubMessage = JSON.parse(
-      Buffer.from(event.data.data, 'base64').toString()
+      Buffer.from(event.data, 'base64').toString()
     );
     const { action } = pubsubMessage;
     if (action !== 'queueTags') {

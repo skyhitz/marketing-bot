@@ -7,9 +7,9 @@ import fetch from 'node-fetch';
 class Tag {
   public maxPerPage = 5;
 
-  public async process(event: { data: { data: string } }, callback: Function) {
+  public async process(event: { data: string }, callback: Function) {
     const pubsubMessage = JSON.parse(
-      Buffer.from(event.data.data, 'base64').toString()
+      Buffer.from(event.data, 'base64').toString()
     );
     const { action, tag } = pubsubMessage;
 
