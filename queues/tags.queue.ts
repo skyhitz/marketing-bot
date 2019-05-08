@@ -23,6 +23,7 @@ class Tags {
       1,
       async (tag, callback) => {
         await pubsubPublisher.processTag(tag);
+        callback();
       },
       err => {
         if (err) {
